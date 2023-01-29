@@ -1,18 +1,28 @@
 import React from "react";
-import PostService from "./Api/PostService";
+import StartPage from "./components/StartPage/StartPage";
+import Gantt from "./components/GanttPage/Gantt"
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 function App() {
-  const request = ()=>{
-    PostService.getListTasks('01/01/2023','01/02/2023', null, 111111);
-  }
-  const request2 = ()=>{
-    PostService.getTask(1);
-  }
+
   return (
-    <div className="App">
-      <button onClick={request}>Кнопа</button>
-      <button onClick={request2}>Кнопа2</button>
-    </div>
+    <Router>
+      <div>
+        <Switch>
+          <Route path="/" exact>
+            <StartPage/>
+          </Route>
+          <Route path="/gantt">
+            <Gantt/>
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 

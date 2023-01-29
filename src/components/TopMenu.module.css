@@ -1,0 +1,7 @@
+.tm01{
+    display: flex;
+    flex-direction: row;    
+}
+.tm02{
+    margin-right: 30px !important;
+}
