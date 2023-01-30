@@ -28,10 +28,17 @@ const reorder = (list, startIndex, endIndex) => {
 };
 
 function Widget({ widget, index }) {
+    var classs = styles.b05;
+    if(widget.isSeccessful){
+        classs= classs + ' ' + styles.tasktrue;
+    }
+    if(widget.isSeccessful==false){
+        classs= classs + ' ' + styles.taskfalse;
+    }
     return (
         <Draggable draggableId={widget.id} index={index}>
             {provided => (
-                <div className={styles.b05} //Почемк не могу поставить цвет????????
+                <div className={classs}//как запустить перерендер???
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}>

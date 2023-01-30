@@ -44,3 +44,9 @@
     right: 0;
     background-color: rgba(0, 0, 0, 0.5);
 }
+.tasktrue{
+    background-color: greenyellow;
+}
+.taskfalse{
+    background-color: red;
+}
