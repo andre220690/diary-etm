@@ -31,7 +31,7 @@ function Widget({ widget, index }) {
     return (
         <Draggable draggableId={widget.id} index={index}>
             {provided => (
-                <div className={styles.b05}
+                <div className={styles.b05} //Почемк не могу поставить цвет????????
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}>
@@ -66,25 +66,31 @@ function Column({ droppableId, widgets }) {
     );
 }
 
-const Complite = ({ setState, numStick, setComplite }) => {
+const Complite = ({ maxColumn, setState, index, setComplite, state }) => {
 
     const isTrue = () => {
-        setState([numStick].isSeccessful = true);
-        console.log("true");
+        var data = state.widgets;
+        data[maxColumn][index].isSeccessful = true;
+
+        setState({ widgets: data });
         setComplite(false);
+        console.log(state)
     }
 
     const isFalse = () => {
-        setState([numStick].isSeccessful = false);
-        console.log("false");
+        var data = state.widgets;
+        data[maxColumn][index].isSeccessful = false;
+
+        setState({ widgets: data });
         setComplite(false);
+        console.log(state)
     }
 
     return (
         <div className={styles.outSide}>
             <div className={styles.b04}>
-                <Button onClick={isTrue} style={{backgroundColor: '#69dd51'}} className={styles.b06} variant='contained'>УСПЕХ</Button>
-                <Button onClick={isFalse} style={{backgroundColor: '#e35f5f'}} className={styles.b06} variant='contained'>НЕУДАЧА</Button>
+                <Button onClick={isTrue} style={{ backgroundColor: '#69dd51' }} className={styles.b06} variant='contained'>УСПЕХ</Button>
+                <Button onClick={isFalse} style={{ backgroundColor: '#e35f5f' }} className={styles.b06} variant='contained'>НЕУДАЧА</Button>
             </div>
         </div>
     );
@@ -94,12 +100,11 @@ const Board = ({ sticks, sample }) => {
     const [state, setState] = useState({ widgets: initial });
     const [columns, setColumns] = useState([]);
     const [isComplite, setComplite] = useState(false);
-    const [numStick, setNumStick] = useState();
-    var maxColumn = '3';
+    const [index, setIndex] = useState();
+    const [maxColumn, setMaxColumn] = useState();
 
     useEffect(() => {
         setColumns(sample.split('|'));
-        let arr = [];
         sticks.map((item) =>
             initial[item.status].push({
                 id: (item.id).toString(),
@@ -107,10 +112,7 @@ const Board = ({ sticks, sample }) => {
                 status: item.status,
                 isSeccessful: item.isSeccessful
             })
-
         );
-        //не работает
-        maxColumn = (columns.length).toString();
     }, [])
 
     function onDragEnd(result) {
@@ -153,17 +155,20 @@ const Board = ({ sticks, sample }) => {
             };
             setState(updateState);
 
-            if (result.destination.droppableId == maxColumn) {
-                setNumStick(result.draggableId);
+            var maxColumn = (columns.length - 1).toString();
+            setMaxColumn(maxColumn);
+
+            if (result.destination.droppableId === maxColumn) {
+                setIndex(result.destination.index);
                 setComplite(true);
             }
+
 
 
         }
     }
     return (
         <DragDropContext onDragEnd={onDragEnd}>
-            {console.log(state.widgets)}
             <div className={styles.b01}>
                 {
                     columns.map((item, i) =>
@@ -176,10 +181,9 @@ const Board = ({ sticks, sample }) => {
 
             </div>
             {isComplite
-                ? <Complite setState={setState} numStick={numStick} setComplite={setComplite} />
+                ? <Complite maxColumn={maxColumn} setState={setState} index={index} setComplite={setComplite} state={state} />
                 : <div />
             }
-
 
         </DragDropContext>
     );
