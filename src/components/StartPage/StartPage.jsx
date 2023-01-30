@@ -9,7 +9,7 @@ const StartPage = () => {
   return (
     <div className={styles.sp01}>
       <Button className={styles.btnSp01} variant='contained' component={Link} to="/gantt">ЗАДАЧИ</Button>
-      <Button className={styles.btnSp01} variant='contained' component={Link}>ДОСКА</Button>
+      <Button className={styles.btnSp01} variant='contained' component={Link} to="/kanban">ДОСКА</Button>
       <Button className={styles.btnSp01} variant='contained' component={Link}>ОТЧЁТ</Button>
       <Button className={styles.btnSp01} variant='contained' component={Link}>ИЗБРАННЫЕ</Button>
       <Button className={styles.btnSp01} variant='contained' component={Link}>СОЗДАТЬ ДОСКУ</Button>

@@ -1,11 +1,7 @@
-import React, {useEffect,useState} from 'react'
+import React, { Component } from 'react'
 import TopMenu from '../TopMenu'
 
 const Gantt = () => {
-
-    useEffect(()=>{
-
-    },[])
 
     const Filter=()=>{        
         //Открыть компонент фильтра
@@ -22,6 +18,8 @@ const Gantt = () => {
         name: 'Создать задачу',
         action: AddTask
     }];
+
+    
         
     return (
         <div>
