@@ -29,10 +29,10 @@ const reorder = (list, startIndex, endIndex) => {
 
 function Widget({ widget, index }) {
     var classs = styles.b05;
-    if(widget.isSeccessful){
+    if(widget.isSuccessful){
         classs= classs + ' ' + styles.tasktrue;
     }
-    if(widget.isSeccessful==false){
+    if(widget.isSuccessful==false){
         classs= classs + ' ' + styles.taskfalse;
     }
     return (
@@ -77,7 +77,7 @@ const Complite = ({ maxColumn, setState, index, setComplite, state }) => {
 
     const isTrue = () => {
         var data = state.widgets;
-        data[maxColumn][index].isSeccessful = true;
+        data[maxColumn][index].isSuccessful = true;
 
         setState({ widgets: data });
         setComplite(false);
@@ -86,7 +86,7 @@ const Complite = ({ maxColumn, setState, index, setComplite, state }) => {
 
     const isFalse = () => {
         var data = state.widgets;
-        data[maxColumn][index].isSeccessful = false;
+        data[maxColumn][index].isSuccessful = false;
 
         setState({ widgets: data });
         setComplite(false);
@@ -111,13 +111,13 @@ const Board = ({ sticks, sample }) => {
     const [maxColumn, setMaxColumn] = useState();
 
     useEffect(() => {
-        setColumns(sample.split('|'));
+        setColumns(sample);
         sticks.map((item) =>
-            initial[item.status].push({
+            initial[item.numStatus].push({
                 id: (item.id).toString(),
                 content: item.description,
-                status: item.status,
-                isSeccessful: item.isSeccessful
+                status: item.numStatus,
+                isSuccessful: item.isSuccessful
             })
         );
     }, [])

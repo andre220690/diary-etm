@@ -2,10 +2,6 @@ import axios from 'axios'
 import config from '../config.json'
 
 export default class PostService{
-    static async getAll(){
-        const response = await axios.get(config.api+'api/products/all',{});
-        return response;
-    }
 
     static async getListTasks(date1, date2, department, userCode, condition){
         const response = await axios.get(config.api+'ListTasks', {

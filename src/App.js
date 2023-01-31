@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 
 function App() {
+  localStorage.setItem("UserCode", 111111);
 
   return (
     <Router>

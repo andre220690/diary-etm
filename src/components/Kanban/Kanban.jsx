@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import TopMenu from '../TopMenu'
 import Board from './Board'
+import PostService from '../../Api/PostService';
+import { useToJson } from '../../hooks/useToJson';
 
 const Kanban = () => {
+    const [sticks, setStick] = useState([]);
+    const [sample, setSample] = useState("");
+    const [toJSON] = useToJson();
 
     const Filter=()=>{        
         //Открыть компонент фильтра
@@ -28,41 +33,57 @@ const Kanban = () => {
     }];
 
 
-    const sample = 'to do|progress|dsadada|adddd|seccessfull'
 
-    const sticks =[
-        {
-            id: 1,
-            description: "начало",
-            status: 0,
-            isSeccessful: null
-        },
-        {
-            id: 2,
-            description: "прогресс",
-            status: 1,
-            isSeccessful: null
-        },
-        {
-            id: 3,
-            description: "начат",
-            status: 0,
-            isSeccessful: null
-        },
-        {
-            id: 4,
-            description: "начат",
-            status: 2,
-            isSeccessful: true
-        } ,
-        {
-            id: 5,
-            description: "начат",
-            status: 2,
-            isSeccessful: false
-        }    
-    ]
+    const getSticks = async () => {
+        const response = await PostService.getSticksOnExpress(localStorage.getItem("UserCode"));
+        //var result = toJSON(response.data);
+        setStick(response.data);
 
+    }
+    const getSample = async () => {
+        const response = await PostService.getCanbanExpress();
+        setSample(response.data);
+    }
+
+    useEffect(()=>{
+        getSticks();        
+        getSample();
+
+        //setStick([
+        //    {
+        //        id: 1,
+        //        description: "начало",
+        //        status: 0,
+        //        isSuccessful: null
+        //    },
+        //    {
+        //        id: 2,
+        //        description: "прогресс",
+        //        status: 1,
+        //        isSuccessful: null
+        //    },
+        //    {
+        //        id: 3,
+        //        description: "начат",
+        //        status: 0,
+        //        isSuccessful: null
+        //    },
+        //    {
+        //        id: 4,
+        //        description: "начат",
+        //        status: 2,
+        //        isSuccessful: true
+        //    } ,
+        //    {
+        //        id: 5,
+        //        description: "начат",
+        //        status: 2,
+        //        isSuccessful: false
+        //    }    
+        //]);
+        //getSample('to do|progress|dsadada|adddd|seccessfull');
+
+    },[])
 
 
 
@@ -71,7 +92,10 @@ const Kanban = () => {
   return (
     <div>
         <TopMenu buttons={buttons}/>
-        <Board sample={sample} sticks={sticks}/>
+        {sample&&sticks
+        ?<Board sample={sample} sticks={sticks}/>
+        :<div/>
+        }
     </div>
   )
 }
