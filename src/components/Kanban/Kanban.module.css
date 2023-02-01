@@ -1,0 +1,33 @@
+.outSide{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.knb01 {
+    top: 40%;
+    left: 40%;
+    display:grid !important;
+    position: absolute;
+    outline: 0;
+    margin: auto;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    padding: 24px;
+    background-color: #fff;
+    border: 1px solid #E7EBF0;
+    border-left-width: 0;
+    border-right-width: 0;
+}
+.knb02{
+    margin-top: 20px;
+}

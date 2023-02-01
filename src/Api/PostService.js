@@ -92,8 +92,8 @@ export default class PostService{
         });
         return response;
     }
-    static async getSticksRefrash(stickId, status, isSeccessful){
-        const response = await axios.get(config.api+'SticksRefrash', {
+    static async getStickRefrash(stickId, status, isSeccessful){
+        const response = await axios.get(config.api+'StickRefrash', {
             params : {
                 stickId : stickId,
                 status : status,

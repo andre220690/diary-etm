@@ -2,6 +2,7 @@ import React from "react";
 import StartPage from "./components/StartPage/StartPage";
 import Gantt from "./components/GanttPage/Gantt";
 import Kanban from "./components/Kanban/Kanban";
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -24,6 +25,9 @@ function App() {
           </Route>
           <Route path="/kanban">
             <Kanban/>
+          </Route>
+          <Route path="/report">
+            <Report/>
           </Route>
         </Switch>
       </div>

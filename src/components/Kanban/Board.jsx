@@ -3,7 +3,8 @@ import styled from "@emotion/styled";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import styles from "./Board.module.css";
 import Button from '@mui/material/Button';
-
+import PostService from '../../Api/PostService';
+import { unstable_composeClasses } from "@mui/material";
 
 const initial = {
     "0": [],
@@ -29,12 +30,18 @@ const reorder = (list, startIndex, endIndex) => {
 
 function Widget({ widget, index }) {
     var classs = styles.b05;
-    if(widget.isSuccessful){
-        classs= classs + ' ' + styles.tasktrue;
+    if (widget.isSuccessful) {
+        classs = classs + ' ' + styles.tasktrue;
     }
-    if(widget.isSuccessful==false){
-        classs= classs + ' ' + styles.taskfalse;
+    if (widget.isSuccessful == false) {
+        classs = classs + ' ' + styles.taskfalse;
     }
+    const addFavorit = (e)=>{
+        const response = PostService.getAddFavoritStick(localStorage.getItem('UserCode'),widget.id);
+        console.log(response)
+        e.target.color = "secces"
+    }
+
     return (
         <Draggable draggableId={widget.id} index={index}>
             {provided => (
@@ -42,8 +49,12 @@ function Widget({ widget, index }) {
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}>
-                    {widget.content}
+                    <div className={styles.b08}>{widget.content}</div>
+                    <Button className={styles.b07} onClick={addFavorit} variant="contained" color="inherit">
+                        В ИЗБРАННОЕ
+                    </Button>
                 </div>
+
             )}
         </Draggable>
     );
@@ -73,24 +84,38 @@ function Column({ droppableId, widgets }) {
     );
 }
 
-const Complite = ({ maxColumn, setState, index, setComplite, state }) => {
+const Complite = ({ setView, maxColumn, setState, index, setComplite, state }) => {
 
     const isTrue = () => {
         var data = state.widgets;
         data[maxColumn][index].isSuccessful = true;
 
+        //setState(({ widgets: [...state.widgets.map((item, i) => {
+        //    if (i !== maxColumn) {
+        //     return item;
+        //    }
+        //    return item.map((item1, j) => {
+        //     if (j !== index) {
+        //      return item1;
+        //     }
+        //     return { ...item1, isSuccessful : true}
+        //    })
+        //   })]}))
+
+
         setState({ widgets: data });
         setComplite(false);
-        console.log(state)
+        setView(true)
     }
 
     const isFalse = () => {
         var data = state.widgets;
         data[maxColumn][index].isSuccessful = false;
 
+
         setState({ widgets: data });
         setComplite(false);
-        console.log(state)
+        setView(true)
     }
 
     return (
@@ -109,6 +134,10 @@ const Board = ({ sticks, sample }) => {
     const [isComplite, setComplite] = useState(false);
     const [index, setIndex] = useState();
     const [maxColumn, setMaxColumn] = useState();
+    const [xxx, setX] = useState()
+    const [yyy, setY] = useState()
+    const [view, setView] = useState(false)
+
 
     useEffect(() => {
         setColumns(sample);
@@ -120,7 +149,15 @@ const Board = ({ sticks, sample }) => {
                 isSuccessful: item.isSuccessful
             })
         );
+        //ножно поменять на массив
     }, [])
+
+
+    const getRefrash = async (column, index) => {
+        var obj = state.widgets[column][index]
+        const response = PostService.getStickRefrash(obj.id, column, obj.isSuccessful);
+        setView(false)
+    }
 
     function onDragEnd(result) {
         const { source, destination } = result;
@@ -162,6 +199,9 @@ const Board = ({ sticks, sample }) => {
             };
             setState(updateState);
 
+            setX(result.destination.droppableId)
+            setY(result.destination.index)
+
             var maxColumn = (columns.length - 1).toString();
             setMaxColumn(maxColumn);
 
@@ -169,9 +209,12 @@ const Board = ({ sticks, sample }) => {
                 setIndex(result.destination.index);
                 setComplite(true);
             }
+            else {
+                setView(true)
 
+            }
 
-
+            //getRefrash(result.destination.droppableId,result.destination.index)       
         }
     }
     return (
@@ -188,7 +231,11 @@ const Board = ({ sticks, sample }) => {
 
             </div>
             {isComplite
-                ? <Complite maxColumn={maxColumn} setState={setState} index={index} setComplite={setComplite} state={state} />
+                ? <Complite setView={setView} maxColumn={maxColumn} setState={setState} index={index} setComplite={setComplite} state={state} />
+                : <div />
+            }
+            {view
+                ? getRefrash(xxx, yyy)
                 : <div />
             }
 
