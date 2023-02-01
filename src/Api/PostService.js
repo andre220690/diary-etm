@@ -31,6 +31,14 @@ export default class PostService{
         });
         return response;
     }
+    static async getListDepartments(line){
+        const response = await axios.get(config.api+'ListDepartments', {
+            params : {
+                line : line
+            }
+        });
+        return response;
+    }
     static async getListPartners(line){
         const response = await axios.get(config.api+'ListPartners', {
             params : {

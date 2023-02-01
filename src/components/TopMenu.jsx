@@ -12,8 +12,8 @@ const TopMenu = ({buttons}) => {
         <div>
             <div className={styles.tm01}>
                 <Button className={styles.tm02} variant='contained' component={Link} to="/gantt">ЗАДАЧИ</Button>
-                <Button className={styles.tm02} variant='contained' component={Link} to="/report">ДОСКА</Button>
-                <Button className={styles.tm02} variant='contained' component={Link}>ОТЧЁТ</Button>
+                <Button className={styles.tm02} variant='contained' component={Link} to="/kanban">ДОСКА</Button>
+                <Button className={styles.tm02} variant='contained' component={Link} to="/report">ОТЧЁТ</Button>
                 <Button className={styles.tm02} variant='contained' component={Link}>ИЗБРАННЫЕ</Button>
                 <Button className={styles.tm02} variant='contained' component={Link}>СОЗДАТЬ ДОСКУ</Button>
                 {buttons.map((item, i) =>

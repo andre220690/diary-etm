@@ -13,10 +13,6 @@ const Kanban = () => {
     //const [data, setData] = useState();
     const [addSticks, setAddStick] = useState(false);
 
-    const showMenu = ()=>{
-        setAddStick(true)
-    }
-
     const AddStick = () => {
         const [data, setData] = useState();
 
@@ -55,7 +51,7 @@ const Kanban = () => {
     const buttons = [
     {
         name: 'Добавить',
-        action: showMenu
+        action: ()=>{setAddStick(true)}
     }];
 
 

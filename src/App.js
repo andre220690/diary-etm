@@ -2,7 +2,7 @@ import React from "react";
 import StartPage from "./components/StartPage/StartPage";
 import Gantt from "./components/GanttPage/Gantt";
 import Kanban from "./components/Kanban/Kanban";
-
+import Report from "./components/Report/Report";
 import {
   BrowserRouter as Router,
   Switch,
