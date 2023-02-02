@@ -4,7 +4,6 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import styles from './Report.module.css'
 import Button from '@mui/material/Button';
-import { Dayjs } from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -17,7 +16,7 @@ const FilterReport = ({ setReportData, setShowMenuFilter}) => {
   const [departments, setDepartments] = useState({ id: [], name: [] })
   const [valueUser, setValueUser] = useState(null);
   const [codeUser, setCodeUser] = useState()
-  const [inputUser, setInputValue] = useState('');
+  const [inputUser, setInputUser] = useState('');
   const [valueDepartment, setValueDepartment] = useState(null);
   const [codeDepartment, setCodeDepartment] = useState()
   const [inputDepartment, setInputDepartment] = useState('');
@@ -99,13 +98,6 @@ const FilterReport = ({ setReportData, setShowMenuFilter}) => {
       )
 
     }
-
-    if (valueUser !== null) {
-
-    }
-    if (valueDepartment !== null) {
-
-    }
   }
 
   const getDepartment = async () => {
@@ -139,7 +131,7 @@ const FilterReport = ({ setReportData, setShowMenuFilter}) => {
           }}
           inputValue={inputUser}
           onInputChange={(event, newInputValue) => {
-            setInputValue(newInputValue);
+            setInputUser(newInputValue);
           }}
           id="controllable-states-demo"
           options={users.name}

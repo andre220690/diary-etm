@@ -4,7 +4,7 @@ import Board from './Board'
 import PostService from '../../Api/PostService';
 import styles from './Kanban.module.css'
 import Button from '@mui/material/Button';
-import { TextField } from '@mui/material';
+import { TextField, CircularProgress, Box } from '@mui/material';
 
 
 const Kanban = () => {
@@ -18,13 +18,13 @@ const Kanban = () => {
 
         const addStk = async () => {
             console.log(data)
-            if(data){
+            if (data) {
                 var obj = {
-                    Description : data,
-                    NameStatus : sample[0],
-                    NumStatus : 0,
-                    BoardId : 1,
-                    UserCode : localStorage.getItem("UserCode")
+                    Description: data,
+                    NameStatus: sample[0],
+                    NumStatus: 0,
+                    BoardId: 1,
+                    UserCode: localStorage.getItem("UserCode")
                 }
                 console.log(obj)
                 await PostService.postAddStick(obj)
@@ -35,24 +35,24 @@ const Kanban = () => {
         return (
             <div className={styles.outSide}>
                 <div className={styles.knb01}>
-                    <TextField                        
+                    <TextField
                         id="outlined-multiline-flexible"
                         label="Задача"
                         multiline
                         maxRows={4}
-                        value={data} onChange={(e)=>setData(e.target.value)}
+                        value={data} onChange={(e) => setData(e.target.value)}
                     />
-                    <Button style={{marginTop: '15px'}} onClick={addStk} variant='contained'>СОЗДАТЬ</Button>
+                    <Button style={{ marginTop: '15px' }} onClick={addStk} variant='contained'>СОЗДАТЬ</Button>
                 </div>
             </div>
         )
     }
 
     const buttons = [
-    {
-        name: 'Добавить',
-        action: ()=>{setAddStick(true)}
-    }];
+        {
+            name: 'Добавить',
+            action: () => { setAddStick(true) }
+        }];
 
 
     const getSticks = async () => {
@@ -76,7 +76,9 @@ const Kanban = () => {
             <TopMenu buttons={buttons} />
             {sample && sticks.length
                 ? <Board refrash={getSticks} sample={sample} sticks={sticks} />
-                : <div />
+                : <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '200px' }}>
+                    <CircularProgress />
+                </Box>
             }
             {addSticks
                 ? <AddStick />

@@ -10,6 +10,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import AddBoard from "./components/AddBoard/AddBoard";
 
 function App() {
   localStorage.setItem("UserCode", 111111);
@@ -32,6 +33,9 @@ function App() {
           </Route>
           <Route path="/favorits">
             <Favorits/>
+          </Route>
+          <Route path="/addboard">
+            <AddBoard/>
           </Route>
         </Switch>
       </div>

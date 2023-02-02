@@ -4,7 +4,6 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import styles from "./Board.module.css";
 import Button from '@mui/material/Button';
 import PostService from '../../Api/PostService';
-import { unstable_composeClasses } from "@mui/material";
 
 const initial = {
     "0": [],
