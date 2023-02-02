@@ -11,7 +11,7 @@ const StartPage = () => {
       <Button className={styles.btnSp01} variant='contained' component={Link} to="/gantt">ЗАДАЧИ</Button>
       <Button className={styles.btnSp01} variant='contained' component={Link} to="/kanban">ДОСКА</Button>
       <Button className={styles.btnSp01} variant='contained' component={Link} to="/report">ОТЧЁТ</Button>
-      <Button className={styles.btnSp01} variant='contained' component={Link}>ИЗБРАННЫЕ</Button>
+      <Button className={styles.btnSp01} variant='contained' component={Link} to="/favorits">ИЗБРАННЫЕ</Button>
       <Button className={styles.btnSp01} variant='contained' component={Link}>СОЗДАТЬ ДОСКУ</Button>
     </div>
     

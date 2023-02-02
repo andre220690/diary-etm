@@ -3,6 +3,7 @@ import StartPage from "./components/StartPage/StartPage";
 import Gantt from "./components/GanttPage/Gantt";
 import Kanban from "./components/Kanban/Kanban";
 import Report from "./components/Report/Report";
+import Favorits from "./components/Favorits/Favorits";
 import {
   BrowserRouter as Router,
   Switch,
@@ -28,6 +29,9 @@ function App() {
           </Route>
           <Route path="/report">
             <Report/>
+          </Route>
+          <Route path="/favorits">
+            <Favorits/>
           </Route>
         </Switch>
       </div>
