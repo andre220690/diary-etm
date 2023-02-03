@@ -14,6 +14,7 @@ import AddBoard from "./components/AddBoard/AddBoard";
 
 function App() {
   localStorage.setItem("UserCode", 111111);
+  
 
   return (
     <Router>

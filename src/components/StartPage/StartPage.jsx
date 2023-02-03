@@ -2,7 +2,6 @@ import React from 'react'
 import Button from '@mui/material/Button';
 import styles from './StartPage.module.css';
 import { Link } from 'react-router-dom';
-import { style } from '@mui/system';
 
 const StartPage = () => {
 
