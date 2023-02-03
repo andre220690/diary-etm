@@ -4,7 +4,6 @@ import '../GanttTable.css'
 import BodyTable from './BodyTable'
 
 const GanttTable = ({data, dateInterval}) => {
-    const [header, setHeader] = useState([])
 
     useEffect(()=>{
 
@@ -15,7 +14,7 @@ const GanttTable = ({data, dateInterval}) => {
     <div>
         <table class="iksweb">
             <HeaderTable dateInterval={dateInterval}/>
-            <BodyTable/>
+            <BodyTable data={data} dateInterval={dateInterval}/>
         </table>
     </div>
   )
