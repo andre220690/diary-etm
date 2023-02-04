@@ -1,6 +1,6 @@
 .fr01{
-    top: 20%;
-    left: 40%;
+    top: 0%;
+    left: 30%;
     display:grid !important;
     position: absolute;
     outline: 0;
@@ -18,6 +18,9 @@
     border: 1px solid #E7EBF0;
     border-left-width: 0;
     border-right-width: 0;
+    border-radius: 15px;
+    
+
 }
 .outSide{
     position: fixed;
@@ -35,4 +38,9 @@
     display: flex;
     justify-content: space-around;
     margin-top: 15px !important;
+}
+.task02{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 15px;
 }

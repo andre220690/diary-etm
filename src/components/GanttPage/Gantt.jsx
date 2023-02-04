@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import TopMenu from '../TopMenu'
 import GanttTable from './GanttTable/GanttTable'
 import FilterTask from './FilterTask'
+import Task from './Task'
 
 const example = [
     {
@@ -28,13 +29,10 @@ const example = [
 
 const Gantt = () => {
     const [showMenuFilter, setShowMenuFilter] = useState(false)
+    const [showNewTask, setShowNewTask] = useState(false)
     const [filtertData, setFilterData] = useState();
 
     const [dateInterval, setDateInterval] = useState(null)
-
-    const AddTask = () => {
-        //открыть компонет задачи
-    }
 
 
     const buttons = [{
@@ -43,7 +41,7 @@ const Gantt = () => {
     },
     {
         name: 'Создать задачу',
-        action: AddTask
+        action: () => { setShowNewTask(true)}
     }];
 
 
@@ -52,7 +50,11 @@ const Gantt = () => {
         <div>
             {showMenuFilter
                 ? <FilterTask setFilterData={setFilterData} setDateInterval={setDateInterval} setShowMenuFilter={setShowMenuFilter}/>
-                : <div />
+                : ''
+            }
+            {showNewTask
+            ? <Task setShowTask={setShowNewTask}/>
+            :''
             }
             <TopMenu buttons={buttons} />
             <GanttTable data={example} dateInterval={dateInterval} />

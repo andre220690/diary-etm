@@ -14,7 +14,10 @@ const GanttTable = ({data, dateInterval}) => {
     <div>
         <table class="iksweb">
             <HeaderTable dateInterval={dateInterval}/>
-            <BodyTable data={data} dateInterval={dateInterval}/>
+            {data && dateInterval!=null
+            ?<BodyTable data={data} dateInterval={dateInterval}/>
+            :''
+            }            
         </table>
     </div>
   )

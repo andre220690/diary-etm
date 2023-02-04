@@ -49,7 +49,6 @@ const HeaderTable = ({ dateInterval }) => {
       arrDays.push(counDayInMonth)
     }
     setDays(arr)
-    console.log(arr)
     setDaysInMonth(arrDays)
   }
 
