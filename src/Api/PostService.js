@@ -75,7 +75,7 @@ export default class PostService{
     static async getCanbanTask(id){
         const response = await axios.get(config.api+'CanbanTask', {
             params : {
-                TaskId : id
+                idTask : id
             }
         });
         return response;
@@ -83,7 +83,7 @@ export default class PostService{
     static async getSticksOnBoardTask(id){
         const response = await axios.get(config.api+'SticksOnBoardTask', {
             params : {
-                TaskId : id
+                idTask : id
             }
         });
         return response;

@@ -9,8 +9,9 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Story from './Story';
 import TaskBoard from './TaskBoard';
+import dayjs from 'dayjs';
 
-const Task = ({ data, setShowTask }) => {
+const Task = ({ TaskId, setShowTask }) => {
     const [isNew, setIsNew] = useState(true)
 
     const [valueStart, setValueStart] = useState(null);
@@ -43,7 +44,10 @@ const Task = ({ data, setShowTask }) => {
 
     useEffect(() => {
 
-        if (data != null) {
+        if (TaskId != null) {
+            getThemes()
+            getConditions()
+            getTask(TaskId)
 
         } else {
             getThemes()
@@ -54,19 +58,34 @@ const Task = ({ data, setShowTask }) => {
 
     useEffect(() => {
         if (inputPartner) {
-            getPartners();
+            getPartners(inputPartner);
         }
     }, [inputPartner])
 
     useEffect(() => {
         if (inputUser) {
-            getUsers();
+            getUsers(inputUser);
         }
     }, [inputUser])
 
-    const getUsers = async () => {
+    const getTask = async(TaskId) =>{
+        const response = await PostService.getTask(TaskId);
+        //dayjs(item.dateStart, "DD.MM.YYYY")
+        setValueStart(dayjs(response.data.start, "DD.MM.YYYY"))
+        setValueEnd(dayjs(response.data.end, "DD.MM.YYYY"))
+        setValuePriority(String(response.data.priority))
+        setValueThema(response.data.theme)
+        setValuePartner(response.data.partner)
+        setValueUser(response.data.user)
+        setDescription(response.data.description)
+        setValueConditio(response.data.condition)
+        setResult(result)
+        setIsNew(false)
+    }
+
+    const getUsers = async (line) => {
         if (inputUser) {
-          const response = await PostService.getListUsers(inputUser);
+          const response = await PostService.getListUsers(line);
     
           var arrId = []
           var arrName = []
@@ -102,8 +121,8 @@ const Task = ({ data, setShowTask }) => {
         setListThemes({ id: arrId, name: arrName });
     }
 
-    const getPartners = async () => {
-        const response = await PostService.getListPartners(inputPartner)
+    const getPartners = async (line) => {
+        const response = await PostService.getListPartners(line)
 
         var arrId = []
         var arrName = []
@@ -114,8 +133,23 @@ const Task = ({ data, setShowTask }) => {
         setListPartners({ id: arrId, name: arrName });
     }
 
-    const saveTask = () =>{
-
+    const saveTask = async () =>{
+        //созранение задачи в бд
+        getPartners(valuePartner)
+        getUsers(valueUser)
+        var post = {
+            id: TaskId,
+            start: valueStart.format('DD/MM/YYYY'),
+            end: valueEnd.format('DD/MM/YYYY'),
+            priority: Number(valuePriority),
+            description: description,
+            result: result,
+            themeId: listThemes.id[listThemes.name.indexOf(valueThema)],
+            partnerId: listPartners.id[listPartners.name.indexOf(valuePartner)],
+            userId: listUsers.id[listUsers.name.indexOf(valueUser)],
+            conditionId: listConditions.id[listConditions.name.indexOf(valueConditio)]
+        }
+        await PostService.postSaveTask(post);
     }
 
     return (
@@ -142,6 +176,7 @@ const Task = ({ data, setShowTask }) => {
                     </div>
                 </LocalizationProvider>
                 <Autocomplete
+                    readOnly={!isNew}
                     value={valuePriority}
                     onChange={(e, i) => {
                         setValuePriority(i);
@@ -153,6 +188,7 @@ const Task = ({ data, setShowTask }) => {
                     renderInput={(params) => <TextField {...params} label="Приоритет" />}
                 />
                 <Autocomplete
+                    readOnly={!isNew}
                     value={valueThema}
                     onChange={(e, i) => {
                         setValueThema(i);
@@ -164,6 +200,7 @@ const Task = ({ data, setShowTask }) => {
                     renderInput={(params) => <TextField {...params} label="Тема" />}
                 />
                 <Autocomplete
+                    readOnly={!isNew}
                     value={valuePartner}
                     onChange={(e, i) => {
                         setValuePartner(i);
@@ -228,17 +265,17 @@ const Task = ({ data, setShowTask }) => {
                 <Button style={{backgroundColor: '#FFD700', color: '#000000'}} onClick={saveTask} variant='contained'>СОХРАНИТЬ</Button>
                 </div>
             </div>
-            {showStory
-            ?<Story setShowStory={setShowStory}/>
+            {showStory 
+            ?<Story setShowStory={setShowStory} idTask={TaskId}/>
             :''
             }
             {showBoard
-            ?<TaskBoard setShowBoard={setShowBoard}/>
+            ?<TaskBoard setShowBoard={setShowBoard} idTask={TaskId}/>
             :''
             }
         </div>
     )
 }
 
-Task.defaultProps = { data: null };
+Task.defaultProps = { TaskId: null };
 export default Task

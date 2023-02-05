@@ -54,15 +54,18 @@ const FilterTask = ({setFilterData, setDateInterval, setShowMenuFilter}) => {
     }
   }
 
-  const viewReport = async () => {
+  const viewTasks = async () => {
     if (valueStart && valueEnd) {
       setDateInterval({
         start: valueStart,
         end: valueEnd
       })
       //добавить сотояние
-      const response = await PostService.getListTasks(valueStart.format('DD/MM/YYYY'), valueEnd.format('DD/MM/YYYY'), codeUser, valueDepartment);
+
+      const response = await PostService.getListTasks(valueStart.format('DD/MM/YYYY'), valueEnd.format('DD/MM/YYYY'), valueDepartment, codeUser);
+      console.log(codeUser)
       setFilterData(response.data)
+      setShowMenuFilter(false)
     }
   }
 
@@ -79,12 +82,9 @@ const FilterTask = ({setFilterData, setDateInterval, setShowMenuFilter}) => {
       setDepartments({ id: arrId, name: arrName });
     }
   }
-  const closeFilter = ()=>{
-    setShowMenuFilter(false);
-  } 
 
   return (
-    <div className={styles.outSide} onClick={closeFilter}>
+    <div className={styles.outSide} onClick={()=>setShowMenuFilter(false)}>
       <div className={styles.fr01} onClick={(e)=>e.stopPropagation()}>
         <div>{`Сотрудник: ${valueUser !== null ? `${valueUser}` : 'не выбран'}`}</div>
         <br />
@@ -144,7 +144,7 @@ const FilterTask = ({setFilterData, setDateInterval, setShowMenuFilter}) => {
           </div>
         </LocalizationProvider>
 
-        <Button style={{ marginTop: '15px' }} onClick={viewReport} variant='contained'>ПОИСК</Button>
+        <Button style={{ marginTop: '15px' }} onClick={viewTasks} variant='contained'>ПОИСК</Button>
       </div>
 
     </div>

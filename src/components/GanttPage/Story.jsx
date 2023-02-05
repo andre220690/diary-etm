@@ -1,8 +1,12 @@
 import React from 'react'
+import styles from './Gantt.module.css'
 
 const Story = () => {
+
   return (
-    <div>Story</div>
+    <div className={styles.board01}>
+      история
+    </div>
   )
 }
 

@@ -57,7 +57,7 @@ const Gantt = () => {
             :''
             }
             <TopMenu buttons={buttons} />
-            <GanttTable data={example} dateInterval={dateInterval} />
+            <GanttTable data={filtertData} dateInterval={dateInterval} />
         </div>
     )
 }

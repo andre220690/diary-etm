@@ -18,8 +18,7 @@
     border: 1px solid #E7EBF0;
     border-left-width: 0;
     border-right-width: 0;
-    border-radius: 15px;
-    
+    border-radius: 15px;   
 
 }
 .outSide{
@@ -28,7 +27,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.8);
 }
 .r01{
     display: flex;
@@ -43,4 +42,27 @@
     display: flex;
     justify-content: space-around;
     margin-top: 15px;
+}
+.board01{
+    top: 10%;
+    left: 10%;
+    display:grid !important;
+    position: absolute;
+    outline: 0;
+    margin: auto;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    padding: 30px;
+    background-color: #fff;
+    border: 1px solid #E7EBF0;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-radius: 15px;
+    z-index: 10;
 }

@@ -17,7 +17,7 @@ const TaskLine = ({ item }) => {
         <div onClick={getTask}>
             {item.description}
             {showTask
-                ? <Task data={dataTask} setShowTask={setShowTask}/>
+                ? <Task TaskId={dataTask.id} setShowTask={setShowTask}/>
                 : ''
             }
         </div>
