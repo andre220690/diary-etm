@@ -7,7 +7,6 @@ const BodyTable = ({ data, dateInterval }) => {
     const [location, setLocation] = useState()
 
     useEffect(() => {
-        console.log(data)
         if (dateInterval != null) {
             var arr = []
             data.map(item => {

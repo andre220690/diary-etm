@@ -68,7 +68,7 @@ const Task = ({ TaskId, setShowTask }) => {
         }
     }, [inputUser])
 
-    const getTask = async(TaskId) =>{
+    const getTask = async (TaskId) => {
         const response = await PostService.getTask(TaskId);
         //dayjs(item.dateStart, "DD.MM.YYYY")
         setValueStart(dayjs(response.data.start, "DD.MM.YYYY"))
@@ -85,19 +85,19 @@ const Task = ({ TaskId, setShowTask }) => {
 
     const getUsers = async (line) => {
         if (inputUser) {
-          const response = await PostService.getListUsers(line);
-    
-          var arrId = []
-          var arrName = []
-          response.data.map(item => {
-            arrId.push(item.code);
-            arrName.push(item.userName)
-          })
-          setListUsers({ id: arrId, name: arrName });
-        }
-      }
+            const response = await PostService.getListUsers(line);
 
-      const getConditions = async () => {
+            var arrId = []
+            var arrName = []
+            response.data.map(item => {
+                arrId.push(item.code);
+                arrName.push(item.userName)
+            })
+            setListUsers({ id: arrId, name: arrName });
+        }
+    }
+
+    const getConditions = async () => {
         const response = await PostService.getListConditions()
 
         var arrId = []
@@ -133,7 +133,7 @@ const Task = ({ TaskId, setShowTask }) => {
         setListPartners({ id: arrId, name: arrName });
     }
 
-    const saveTask = async () =>{
+    const saveTask = async () => {
         //созранение задачи в бд
         getPartners(valuePartner)
         getUsers(valueUser)
@@ -152,12 +152,14 @@ const Task = ({ TaskId, setShowTask }) => {
         await PostService.postSaveTask(post);
     }
 
+
     return (
-        <div className={styles.outSide} onClick={() => setShowTask(false)}>
+        <div className={styles.outSide} onClick={(e) => {setShowTask(false); e.stopPropagation()}}>
             <div className={styles.fr01} onClick={(e) => e.stopPropagation()}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <div>
                         <DatePicker
+                            disabled={TaskId}
                             label="Дата начала"
                             value={valueStart}
                             onChange={(newValue) => {
@@ -237,7 +239,7 @@ const Task = ({ TaskId, setShowTask }) => {
                     id="outlined-multiline-flexible"
                     label="Описание"
                     multiline
-                    minRows={5}
+                    minRows={2}
                     value={description} onChange={(e) => setDescription(e.target.value)}
                 />
                 <Autocomplete
@@ -256,22 +258,28 @@ const Task = ({ TaskId, setShowTask }) => {
                     id="outlined-multiline-flexible"
                     label="Результат"
                     multiline
-                    minRows={5}
+                    minRows={2}
                     value={result} onChange={(e) => setResult(e.target.value)}
                 />
                 <div className={styles.task02}>
-                <Button style={{backgroundColor: '#FFD700', color: '#000000'}} onClick={()=>setShowBoard(true)} variant='contained'>ДОСКА</Button>
-                <Button style={{backgroundColor: '#FFD700', color: '#000000'}} onClick={()=>setShowStory(true)} variant='contained'>ИСТОРИЯ</Button>
-                <Button style={{backgroundColor: '#FFD700', color: '#000000'}} onClick={saveTask} variant='contained'>СОХРАНИТЬ</Button>
+                    {TaskId
+                        ? 
+                        <>
+                            <Button style={{ backgroundColor: '#FFD700', color: '#000000' }} onClick={() => setShowBoard(true)} variant='contained'>ДОСКА</Button>
+                            <Button style={{ backgroundColor: '#FFD700', color: '#000000' }} onClick={() => setShowStory(true)} variant='contained'>ИСТОРИЯ</Button>
+                        </>
+                        : ''
+                    }
+                    <Button style={{ backgroundColor: '#FFD700', color: '#000000' }} onClick={saveTask} variant='contained'>СОХРАНИТЬ</Button>
                 </div>
             </div>
-            {showStory 
-            ?<Story setShowStory={setShowStory} idTask={TaskId}/>
-            :''
+            {showStory && TaskId
+                ? <Story setShowStory={setShowStory} TaskId={TaskId} />
+                : ''
             }
             {showBoard
-            ?<TaskBoard setShowBoard={setShowBoard} idTask={TaskId}/>
-            :''
+                ? <TaskBoard setShowBoard={setShowBoard} TaskId={TaskId} />
+                : ''
             }
         </div>
     )

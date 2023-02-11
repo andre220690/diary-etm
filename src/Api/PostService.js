@@ -58,7 +58,7 @@ export default class PostService{
     static async getHistoryTask(id){
         const response = await axios.get(config.api+'HistoryTask', {
             params : {
-                TaskId : id
+                idTask : id
             }
         });
         return response;
@@ -66,7 +66,7 @@ export default class PostService{
     static async getAddHistory(id, line){
         const response = await axios.get(config.api+'AddHistoryTask', {
             params : {
-                TaskId : id,
+                idTask : id,
                 line : line
             }
         });

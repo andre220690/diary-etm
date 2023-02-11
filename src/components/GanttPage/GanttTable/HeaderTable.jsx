@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import dayjs from 'dayjs'
+import styles from '../Gantt.module.css'
 
 const HeaderTable = ({ dateInterval }) => {
   const [month, setMonth] = useState([])
   const [days, setDays] = useState([])
   const [daysInMonth, setDaysInMonth] = useState()
+
 
   useEffect(() => {
     if (dateInterval !== null) {
@@ -56,9 +58,8 @@ const HeaderTable = ({ dateInterval }) => {
     return <td colSpan={daysInMonth[i]} key={i}>{item}</td>
   })
   let tableDays = days.map((item, i) => {
-    return <td key={i}>{item}</td>
+    return <td className={styles.table01} key={i}>{item}</td>
   })
-
 
   return (
     <thead>

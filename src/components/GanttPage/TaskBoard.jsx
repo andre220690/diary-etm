@@ -31,6 +31,7 @@ const TaskBoard = ({ setShowBoard, idTask }) => {
     <div className={styles.outSide}>
       <div className={styles.board01}>
         <Button style={{ marginTop: '15px', width: '100px' }} onClick={addStick} variant='contained'>СОЗДАТЬ</Button>
+        <Button style={{ marginTop: '15px', width: '100px' }} onClick={()=>setShowBoard(false)} variant='contained'>ЗАКРЫТЬ</Button>
         {sample && sticks.length
           ? <Board sticks={sticks} sample={sample} />
           : ''

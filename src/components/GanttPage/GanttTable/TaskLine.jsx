@@ -12,7 +12,7 @@ const TaskLine = ({ item }) => {
         setShowTask(true)
     }
 
-
+    console.log(showTask)
     return (
         <div onClick={getTask}>
             {item.description}

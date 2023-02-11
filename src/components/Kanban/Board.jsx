@@ -148,7 +148,6 @@ const Board = ({ sticks, sample }) => {
                 isSuccessful: item.isSuccessful
             })
         );
-        //ножно поменять на массив
     }, [])
 
 

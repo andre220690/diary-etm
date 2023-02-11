@@ -12,7 +12,7 @@ const GanttTable = ({data, dateInterval}) => {
 
   return (
     <div>
-        <table class="iksweb">
+        <table style={{overflow: 'hidden'}}>
             <HeaderTable dateInterval={dateInterval}/>
             {data && dateInterval!=null
             ?<BodyTable data={data} dateInterval={dateInterval}/>
