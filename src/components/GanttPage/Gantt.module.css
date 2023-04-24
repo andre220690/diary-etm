@@ -46,13 +46,7 @@
     position: absolute;
     outline: 0;
     margin: auto;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
     justify-content: center;
     padding: 30px;
     background-color: #fff;
@@ -69,13 +63,7 @@
     position: absolute;
     outline: 0;
     margin: auto;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
     justify-content: center;
     padding: 30px;
     background-color: #fff;
@@ -86,14 +74,45 @@
     z-index: 10;
 }
 .table01{
+    width: 30px;
     position: relative;
 }
-.table01::after{
+.table01:nth-child(odd)::after{
     position: absolute;
     top: 0;
     right: 0;
     height: 1000px;
     content: '';
-    width: 1px;
-    background-color: rgba(0, 0, 0, 0.3);
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+    z-index: -1;
+}
+.th01{
+    border-right: 1px solid;
+    width: 0px;
+}
+.th02{
+    border-right: 1px solid;
+    text-align: center;
+    border-bottom: 1px solid;
+}
+.tl01{
+    border-radius: 5px;
+    background-color: rgb(129 221 129);
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 3px 1px #00000099;
+    z-index: 1;
+}
+.tl02:nth-child(odd){
+    background-color: #9696961c;
+}
+.tl02{
+    height: 50px;
+}
+.tl01:hover{
+    background-color: rgb(29, 116, 35);
+    transition: 0.5s;
 }

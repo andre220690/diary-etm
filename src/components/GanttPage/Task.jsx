@@ -277,8 +277,8 @@ const Task = ({ TaskId, setShowTask }) => {
                 ? <Story setShowStory={setShowStory} TaskId={TaskId} />
                 : ''
             }
-            {showBoard
-                ? <TaskBoard setShowBoard={setShowBoard} TaskId={TaskId} />
+            {showBoard && TaskId!=null
+                ? <TaskBoard setShowBoard={setShowBoard} idTask={TaskId} />
                 : ''
             }
         </div>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Task from '../Task'
 import PostService from '../../../Api/PostService'
+import styles from '../Gantt.module.css'
 
 const TaskLine = ({ item }) => {
     const [dataTask, setDataTask] = useState()
@@ -12,9 +13,8 @@ const TaskLine = ({ item }) => {
         setShowTask(true)
     }
 
-    console.log(showTask)
     return (
-        <div onClick={getTask}>
+        <div onClick={getTask} className={styles.tl01}>
             {item.description}
             {showTask
                 ? <Task TaskId={dataTask.id} setShowTask={setShowTask}/>

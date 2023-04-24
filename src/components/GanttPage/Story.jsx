@@ -40,6 +40,7 @@ const Story = ({setShowStory, TaskId}) => {
           ?
           <Stack spacing={1} sx={{ maxWidth: 600 }}>
             {story.map((item, i)=>{
+              {console.log(item)}
                 <SnackbarContent key={i} message={item} />
             })}
           </Stack>
@@ -52,7 +53,7 @@ const Story = ({setShowStory, TaskId}) => {
           id="outlined-multiline-flexible"
           label="Результат"
           multiline
-          minRows={5}
+          minRows={2}
           value={message} onChange={(e) => setMessage(e.target.value)}
         />
         <Button style={{ backgroundColor: '#FFD700', color: '#000000' }} onClick={() => SaveMessage()} variant='contained'>Сохранить</Button>

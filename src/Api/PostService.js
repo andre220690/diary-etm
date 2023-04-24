@@ -4,7 +4,7 @@ import config from '../config.json'
 export default class PostService{
 
     static async getListTasks(date1, date2, department, userCode, condition){
-        const response = await axios.get(config.api+'ListTasks', {
+        const response = await axios.get(config.api+'Tasks', {
             params : {
                 date1 : date1,
                 date2 : date2,
@@ -16,15 +16,11 @@ export default class PostService{
         return response;
     }
     static async getTask(id){
-        const response = await axios.get(config.api+'Task', {
-            params : {
-                TaskId : id
-            }
-        });
+        const response = await axios.get(config.api+'Task/'+id);
         return response;
     }
     static async getListUsers(line){
-        const response = await axios.get(config.api+'ListUsers', {
+        const response = await axios.get(config.api+'Users', {
             params : {
                 line : line
             }
@@ -32,7 +28,7 @@ export default class PostService{
         return response;
     }
     static async getListDepartments(line){
-        const response = await axios.get(config.api+'ListDepartments', {
+        const response = await axios.get(config.api+'Departments', {
             params : {
                 line : line
             }
@@ -40,7 +36,7 @@ export default class PostService{
         return response;
     }
     static async getListPartners(line){
-        const response = await axios.get(config.api+'ListPartners', {
+        const response = await axios.get(config.api+'Partners', {
             params : {
                 line : line
             }
@@ -48,60 +44,47 @@ export default class PostService{
         return response;
     }
     static async getListThemes(){
-        const response = await axios.get(config.api+'ListThemes', {});
+        const response = await axios.get(config.api+'Themes', {});
         return response;
     }
     static async getListConditions(){
-        const response = await axios.get(config.api+'ListConditions', {});
+        const response = await axios.get(config.api+'Conditions', {});
         return response;
     }
     static async getHistoryTask(id){
-        const response = await axios.get(config.api+'HistoryTask', {
-            params : {
-                idTask : id
-            }
-        });
+        const response = await axios.get(config.api+'History/'+id);
         return response;
     }
     static async getAddHistory(id, line){
-        const response = await axios.get(config.api+'AddHistoryTask', {
+        const response = await axios.get(config.api+'History/'+id, {
             params : {
-                idTask : id,
                 line : line
             }
         });
         return response;
     }
     static async getCanbanTask(id){
-        const response = await axios.get(config.api+'CanbanTask', {
-            params : {
-                idTask : id
-            }
-        });
+        const response = await axios.get(config.api+'Canban/'+id);
         return response;
     }
-    static async getSticksOnBoardTask(id){
-        const response = await axios.get(config.api+'SticksOnBoardTask', {
-            params : {
-                idTask : id
-            }
-        });
+    static async SticksOnBoardTask(id){
+        const response = await axios.get(config.api+'Sticks/Task/'+id);
         return response;
     }
     static async getCanbanExpress(){
-        const response = await axios.get(config.api+'CanbanExpress', {});
+        const response = await axios.get(config.api+'Canban', {});
         return response;
     }
     static async getSticksOnExpress(userCode){
-        const response = await axios.get(config.api+'SticksOnExpress', {
+        const response = await axios.get(config.api+'Sticks', {
             params : {
                 userCode : userCode
             }
         });
         return response;
     }
-    static async getStickRefrash(stickId, status, isSeccessful){
-        const response = await axios.get(config.api+'StickRefrash', {
+    static async getStick(stickId, status, isSeccessful){
+        const response = await axios.get(config.api+'Stick', {
             params : {
                 stickId : stickId,
                 status : status,
@@ -130,7 +113,7 @@ export default class PostService{
         return response;
     }
     static async getAddFavoritTask(userCode, taskId){
-        const response = await axios.get(config.api+'AddFavoritTask', {
+        const response = await axios.get(config.api+'Favorit/Task', {
             params : {
                 userCode : userCode,
                 taskId : taskId
@@ -139,7 +122,7 @@ export default class PostService{
         return response;
     }
     static async getAddFavoritStick(userCode, stickId){
-        const response = await axios.get(config.api+'AddFavoritStick', {
+        const response = await axios.get(config.api+'Favorit/Stick', {
             params : {
                 userCode : userCode,
                 stickId : stickId
@@ -148,13 +131,13 @@ export default class PostService{
         return response;
     }
     static async postSaveTask(task){
-        await axios.post(config.api+'SaveTask',task);
+        await axios.post(config.api+'Task',task);
     }   
     static async postAddSampleAndSticks(data){
         await axios.post(config.api+'AddSampleAndSticks',data);
     }
     static async postAddStick(data){
-        await axios.post(config.api+'AddStick',data);
+        await axios.post(config.api+'Stick',data);
     }   
     
 

@@ -14,7 +14,8 @@ const TaskBoard = ({ setShowBoard, idTask }) => {
   }, [])
 
   const getSticks = async () => {
-    const response = await PostService.getSticksOnBoardTask(idTask)
+    const response = await PostService.SticksOnBoardTask(idTask)
+    console.log(response.data)
     setSticks(response.data);
   }
   const getSample = async () => {

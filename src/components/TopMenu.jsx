@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import styles from './TopMenu.module.css'
 
 
-const TopMenu = ({buttons}) => {
+const TopMenu = ({ buttons }) => {
 
 
     return (
@@ -16,11 +16,17 @@ const TopMenu = ({buttons}) => {
                 <Button className={styles.tm02} variant='contained' component={Link} to="/favorits">ИЗБРАННЫЕ</Button>
                 <Button className={styles.tm02} variant='contained' component={Link} to="/addboard">СОЗДАТЬ ДОСКУ</Button>
                 {buttons.map((item, i) =>
-                    <Button className={styles.tm02} style={{backgroundColor: '#FFD700', color: '#000000'}} variant='contained' key={i} onClick={item.action}>{item.name}</Button>
+                    <Button
+                        className={styles.tm02}
+                        style={{ backgroundColor: '#FFD700', color: '#000000' }}
+                        variant='contained' key={i}
+                        onClick={item.action}>
+                        {item.name}
+                    </Button>
                 )}
             </div>
         </div>
     )
 }
-TopMenu.defaultProps = {buttons: []};
+TopMenu.defaultProps = { buttons: [] };
 export default TopMenu

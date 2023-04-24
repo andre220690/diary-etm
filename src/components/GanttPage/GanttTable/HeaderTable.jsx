@@ -55,7 +55,7 @@ const HeaderTable = ({ dateInterval }) => {
   }
 
   let tableMonth = month.map((item, i) => {
-    return <td colSpan={daysInMonth[i]} key={i}>{item}</td>
+    return <td className={styles.th02} colSpan={daysInMonth[i]} key={i}>{item}</td>
   })
   let tableDays = days.map((item, i) => {
     return <td className={styles.table01} key={i}>{item}</td>
@@ -64,13 +64,13 @@ const HeaderTable = ({ dateInterval }) => {
   return (
     <thead>
       <tr>
-        <td rowSpan={2}>
+        <td className={styles.th01} rowSpan={2}>
           Контрагент
         </td>
-        <td rowSpan={2}>
+        <td className={styles.th01} rowSpan={2}>
           Сотрудник
         </td>
-        <td rowSpan={2}>
+        <td className={styles.th01} rowSpan={2}>
           Приоритет
         </td>
         {tableMonth}

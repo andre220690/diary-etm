@@ -28,18 +28,6 @@ const AddBoard = () => {
 
     const [counter, setCounter] = useState(0)
 
-
-    useEffect(() => {
-        getUsers();
-    }, [])
-
-    useEffect(() => {
-        if (inputUser) {
-            getUsers();
-        }
-    }, [inputUser])
-
-
     const getUsers = async () => {
         if (inputUser) {
             const response = await PostService.getListUsers(inputUser);
@@ -75,7 +63,23 @@ const AddBoard = () => {
     }
 
     const addSample = () => {
-        // реализовать добавление на сервер
+
+        var arrUsers = []
+        for(let i in chipUsers){
+            arrUsers.add(i.data.codeUSer)
+        }
+
+        var resultSample = chipStages.join('|')
+
+        var post = {
+            start: valueStart.format('DD/MM/YYYY'),
+            end: valueEnd.format('DD/MM/YYYY'),
+            descreption: description,
+            sample: resultSample,
+            descriptions: chipStick,
+            usersCode: arrUsers
+        }
+        PostService.postAddSampleAndSticks(post)        
     }
 
     return (

@@ -75,7 +75,7 @@ const Kanban = () => {
         <div>
             <TopMenu buttons={buttons} />
             {sample && sticks.length
-                ? <Board refrash={getSticks} sample={sample} sticks={sticks} />
+                ? <Board sample={sample} sticks={sticks} />
                 : <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '200px' }}>
                     <CircularProgress />
                 </Box>
