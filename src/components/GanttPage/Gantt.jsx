@@ -1,8 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import TopMenu from '../TopMenu'
 import GanttTable from './GanttTable/GanttTable'
 import FilterTask from './FilterTask'
 import Task from './Task'
+import PostService from '../../Api/PostService'
+import { DatePicker, DateTimePicker, dayPickerClasses } from '@mui/x-date-pickers'
+import dayjs from 'dayjs'
 
 const example = [
     {
@@ -43,6 +46,16 @@ const Gantt = () => {
         name: 'Создать задачу',
         action: () => { setShowNewTask(true)}
     }];
+
+    useEffect(() => {
+        setDateInterval({
+            start: dayjs('01/01/2023'),
+            end: dayjs('03/03/2023')
+          })
+
+        //const response = PostService.getListTasks('01/12/2022', '01/04/2023');
+        setFilterData(example)
+    }, [])
 
 
 
